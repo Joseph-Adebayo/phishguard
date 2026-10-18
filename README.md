@@ -1,19 +1,19 @@
 # PhishGuard
 
-A Flask web app that checks a URL for common signs of phishing. It breaks the URL into its parts and tests each one against a set of rules.
+A Flask web app that checks a link for signs of phishing.
 
 ## What it checks
 
-- **Brand name in the subdomain**, e.g. `paypal.secure-login.example.tk`, where the real domain isn't PayPal
-- **Suspicious top-level domains** often used in scams (`.tk`, `.xyz`, `.top`, ...)
-- **Unusually deep subdomains**
-- **Raw IP addresses** instead of a domain name
-- **Excessive hyphens**
-- **Digits mixed with a brand name**, e.g. `paypal123`
+- Brand names in the subdomain (e.g. `paypal.secure-login.example.tk`)
+- Endings often used in scams (`.tk`, `.xyz`, `.top` and others)
+- Too many subdomains
+- An IP address instead of a domain name
+- Lots of hyphens
+- Numbers next to a brand name (e.g. `paypal123`)
 
 It uses [tldextract](https://github.com/john-kurkowski/tldextract) to split the URL into subdomain, domain and suffix.
 
-## Run it
+## How to run
 
 ```bash
 python -m venv venv
@@ -22,10 +22,8 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Then open http://127.0.0.1:5000.
+Then go to http://127.0.0.1:5000.
 
 ## Limitations
 
-This is rule-based, so it only catches patterns I've written checks for. A clean result doesn't mean a link is safe.
-
-Possible improvements: lookalike characters (e.g. `rn` vs `m`) and domain age checks.
+It only catches the patterns it has checks for, so a link with no red flags isn't guaranteed to be safe.
