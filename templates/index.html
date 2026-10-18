@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 3rem auto; padding: 0 1rem; }
+        input { width: 70%; padding: 8px; }
+        button { padding: 8px 14px; }
+        .warning { color: #b91c1c; }
+        .safe { color: #15803d; }
+    </style>
+</head>
+<body>
+    <h2>PhishGuard: check a URL</h2>
+    <form action="/submit" method="post">
+        <input type="text" name="url" placeholder="Paste a link" value="{{ url or '' }}" required>
+        <button type="submit">Check</button>
+    </form>
+
+    {% if url %}
+        {% if flags %}
+            <h3 class="warning">Potentially suspicious URL</h3>
+            <ul>
+            {% for f in flags %}
+                <li>{{ f }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <h3 class="safe">No obvious red flags</h3>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
